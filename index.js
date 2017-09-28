@@ -88,6 +88,16 @@ Mediaflow.prototype.upload = function(file, options, callback) {
     return nodeify(p, callback)
 }
 
+Mediaflow.prototype.allMedia = function(callback) {
+    var url = this.url('GET', '/media.json', {})
+    var p = new Promise(function(resolve, reject) {
+        http.getJSON(url, function(err, data) {
+            return err ? reject(err) : resolve(data)
+        })
+    })
+    return nodeify(p, callback)
+}
+
 Mediaflow.prototype.search = function(query, callback) {
     var url = this.url('GET', '/media.json', {q: query})
     var p = new Promise(function(resolve, reject) {
